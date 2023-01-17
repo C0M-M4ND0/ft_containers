@@ -6,12 +6,12 @@
 #    By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 13:50:20 by oabdelha          #+#    #+#              #
-#    Updated: 2023/01/12 13:52:33 by oabdelha         ###   ########.fr        #
+#    Updated: 2023/01/14 14:35:45 by oabdelha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -g -std=c++98 -Wall -Werror -Wextra
+CXXFLAGS = -g #-std=c++98 -Wall -Werror -Wextra
 
 OBJECT_PATH = ./object_files/
 FOBJ_SRC = object_files
