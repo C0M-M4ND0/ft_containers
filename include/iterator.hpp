@@ -19,25 +19,30 @@
 namespace ft {
 
    template <class __Iter__>
-    class IterVector : Iterator<typename iterator_traits<__Iter__>::iterator_category, 
+    class IterVector : iterator<typename iterator_traits<__Iter__>::iterator_category, 
                                 typename iterator_traits<__Iter__>::value_type,
                                 typename iterator_traits<__Iter__>::difference_type,
                                 typename iterator_traits<__Iter__>::pointer,
                                 typename iterator_traits<__Iter__>::reference>
     {
         public:
-            typedef typename iterator_traits<__Iter__>::difference_type     difference_type;
-            typedef typename iterator_traits<__Iter__>::value_type          value_type;
-            typedef typename iterator_traits<__Iter__>::pointer             pointer;
-            typedef typename iterator_traits<__Iter__>::reference           reference;
-            typedef typename iterator_traits<__Iter__>::iterator_category   iterator_category;
-            
+            typedef typename ft::iterator_traits<__Iter__>::difference_type     difference_type;
+            typedef typename ft::iterator_traits<__Iter__>::value_type          value_type;
+            typedef typename ft::iterator_traits<__Iter__>::pointer             pointer;
+            typedef typename ft::iterator_traits<__Iter__>::reference           reference;
+            typedef typename ft::iterator_traits<__Iter__>::iterator_category   iterator_category;
+
             IterVector() : _ptr(NULL) {
                 
             }
 
             explicit IterVector(__Iter__ ptr) : _ptr(ptr) {
                 
+            }
+            
+            template <class __Iter>
+            IterVector(IterVector<__Iter> const & rhs) {
+                *this = rhs;
             }
 
             ~IterVector() {
@@ -83,12 +88,25 @@ namespace ft {
                 return (IterVector(_ptr + n));
             }
 
+            difference_type operator+(IterVector const & rhs) const {
+                return (_ptr + rhs._ptr);
+            }
+
             IterVector operator-(difference_type n) const {
                 return (IterVector(_ptr - n));
             }
 
+            difference_type operator-(IterVector const & rhs) const {
+                return (_ptr - rhs._ptr);
+            }
+
             IterVector & operator+=(difference_type n) {
                 _ptr += n;
+                return (*this);
+            }
+
+            difference_type operator+=(IterVector const & rhs) {
+                _ptr += rhs._ptr;
                 return (*this);
             }
 
@@ -97,6 +115,11 @@ namespace ft {
                 return (*this);
             }
 
+            difference_type operator-=(IterVector const & rhs) {
+                _ptr -= rhs._ptr;
+                return (*this);
+            }
+            
             reference operator[](difference_type n) const {
                 return (_ptr[n]);
             }

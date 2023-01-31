@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:04:34 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/17 13:26:03 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:38:38 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,25 @@
 namespace ft {
     
     template <class __Iter__>
-    class ReverseIterVector : Iterator<typename iterator_traits<__Iter__>::iterator_category, 
-                                typename iterator_traits<__Iter__>::value_type,
-                                typename iterator_traits<__Iter__>::difference_type,
-                                typename iterator_traits<__Iter__>::pointer,
-                                typename iterator_traits<__Iter__>::reference>
+    class ReverseIterVector 
     {
         public:
-            typedef typename iterator_traits<__Iter__>::difference_type     difference_type;
-            typedef typename iterator_traits<__Iter__>::value_type          value_type;
-            typedef typename iterator_traits<__Iter__>::pointer             pointer;
-            typedef typename iterator_traits<__Iter__>::reference           reference;
-            typedef typename iterator_traits<__Iter__>::iterator_category   iterator_category;
+            typedef typename ft::iterator_traits<__Iter__>::difference_type     difference_type;
+            typedef typename ft::iterator_traits<__Iter__>::value_type          value_type;
+            typedef typename ft::iterator_traits<__Iter__>::pointer             pointer;
+            typedef typename ft::iterator_traits<__Iter__>::reference           reference;
+            typedef typename ft::iterator_traits<__Iter__>::iterator_category   iterator_category;
         
             ReverseIterVector() : _ptr(NULL) {
                 
             }
             explicit ReverseIterVector(__Iter__ ptr) : _ptr(ptr) {
                 
+            }
+
+            template <class __Iter>
+            ReverseIterVector(ReverseIterVector<__Iter> const & rhs) {
+                *this = rhs;
             }
 
             ~ReverseIterVector() {

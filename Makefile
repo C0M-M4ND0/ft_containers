@@ -6,12 +6,12 @@
 #    By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 13:50:20 by oabdelha          #+#    #+#              #
-#    Updated: 2023/01/14 14:35:45 by oabdelha         ###   ########.fr        #
+#    Updated: 2023/01/31 11:32:06 by oabdelha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -g #-std=c++98 -Wall -Werror -Wextra
+CXXFLAGS = -g #-fsanitize=address -fsanitize=undefined #-std=c++98 -Wall -Werror -Wextra
 
 OBJECT_PATH = ./object_files/
 FOBJ_SRC = object_files
@@ -19,7 +19,7 @@ SRC = main.cpp
 
 NAME = main
 
-INCLUDE = $(addprefix include/, vector.hpp)
+INCLUDE = $(addprefix include/, vector.hpp iterator.hpp reverse_iterator.hpp type_traits.hpp iterator_traits.hpp)
 OBJECTS = $(addprefix $(OBJECT_PATH), $(SRC:.cpp=.o))
 
 all: $(NAME)

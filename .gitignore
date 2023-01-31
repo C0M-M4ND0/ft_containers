@@ -1,2 +1,7 @@
 cluv.hpp
 .vscode
+main
+object_files
+.clang-format
+clang-format-10_macosx-amd64
+ft_containers-unit-test
