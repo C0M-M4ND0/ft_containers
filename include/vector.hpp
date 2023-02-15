@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:54:52 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/27 16:58:40 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:49:04 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ namespace ft {
         typedef typename allocator_type::const_pointer   const_pointer;
         typedef ft::IterVector<pointer>                  iterator;
         typedef ft::IterVector<const_pointer>            const_iterator;
-        typedef ft::ReverseIterVector<pointer>           reverse_iterator;
-        typedef ft::ReverseIterVector<const_pointer>     const_reverse_iterator;
+        typedef ft::ReverseIterator<pointer>             reverse_iterator;
+        typedef ft::ReverseIterator<const_pointer>       const_reverse_iterator;
 
         // Constructors
         explicit vector(const allocator_type &alloc = allocator_type())
@@ -73,9 +73,9 @@ namespace ft {
 
         vector(const vector &x) : alloc(x.alloc), __begin(NULL), __end(NULL), __end_cap(NULL){
             size_type n = x.size();
-                if (n > 0) {
-                    __vallocate__(n);
-                    __construct_at_end__(n, x.__begin, x.__end);
+            if (n > 0) {
+                __vallocate__(n);
+                __construct_at_end__(n, x.__begin, x.__end);
             }
         }
         // end constructors

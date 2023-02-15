@@ -88,10 +88,6 @@ namespace ft {
                 return (IterVector(_ptr + n));
             }
 
-            difference_type operator+(IterVector const & rhs) const {
-                return (_ptr + rhs._ptr);
-            }
-
             IterVector operator-(difference_type n) const {
                 return (IterVector(_ptr - n));
             }

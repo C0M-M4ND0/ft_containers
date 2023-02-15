@@ -6,7 +6,7 @@
 #    By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 13:50:20 by oabdelha          #+#    #+#              #
-#    Updated: 2023/01/31 11:32:06 by oabdelha         ###   ########.fr        #
+#    Updated: 2023/02/10 11:04:54 by oabdelha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = main.cpp
 
 NAME = main
 
-INCLUDE = $(addprefix include/, vector.hpp iterator.hpp reverse_iterator.hpp type_traits.hpp iterator_traits.hpp)
+INCLUDE = $(addprefix include/, vector.hpp iterator.hpp reverse_iterator.hpp type_traits.hpp iterator_traits.hpp map.hpp red-black_tree.hpp red-black_tree_iterator.hpp)
 OBJECTS = $(addprefix $(OBJECT_PATH), $(SRC:.cpp=.o))
 
 all: $(NAME)

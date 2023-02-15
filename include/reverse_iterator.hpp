@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:04:34 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/28 12:38:38 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:39:46 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 namespace ft {
     
     template <class __Iter__>
-    class ReverseIterVector 
+    class ReverseIterator 
     {
         public:
             typedef typename ft::iterator_traits<__Iter__>::difference_type     difference_type;
@@ -29,23 +29,23 @@ namespace ft {
             typedef typename ft::iterator_traits<__Iter__>::reference           reference;
             typedef typename ft::iterator_traits<__Iter__>::iterator_category   iterator_category;
         
-            ReverseIterVector() : _ptr(NULL) {
+            ReverseIterator() : _ptr(NULL) {
                 
             }
-            explicit ReverseIterVector(__Iter__ ptr) : _ptr(ptr) {
+            explicit ReverseIterator(__Iter__ ptr) : _ptr(ptr) {
                 
             }
 
             template <class __Iter>
-            ReverseIterVector(ReverseIterVector<__Iter> const & rhs) {
+            ReverseIterator(ReverseIterator<__Iter> const & rhs) {
                 *this = rhs;
             }
 
-            ~ReverseIterVector() {
+            ~ReverseIterator() {
                 
             }
 
-            ReverseIterVector & operator=(ReverseIterVector const & rhs) {
+            ReverseIterator & operator=(ReverseIterator const & rhs) {
                 _ptr = rhs._ptr;
                 return (*this);
             }
@@ -58,42 +58,42 @@ namespace ft {
                 return (_ptr);
             }
 
-            ReverseIterVector & operator++() {
+            ReverseIterator & operator++() {
                 --_ptr;
                 return (*this);
             }
 
-            ReverseIterVector operator++(int) {
-                ReverseIterVector tmp(*this);
+            ReverseIterator operator++(int) {
+                ReverseIterator tmp(*this);
                 operator++();
                 return (tmp);
             }
 
-            ReverseIterVector & operator--() {
+            ReverseIterator & operator--() {
                 ++_ptr;
                 return (*this);
             }
 
-            ReverseIterVector operator--(int) {
-                ReverseIterVector tmp(*this);
+            ReverseIterator operator--(int) {
+                ReverseIterator tmp(*this);
                 operator--();
                 return (tmp);
             }
 
-            ReverseIterVector operator+(difference_type n) const {
-                return (ReverseIterVector(_ptr - n));
+            ReverseIterator operator+(difference_type n) const {
+                return (ReverseIterator(_ptr - n));
             }
 
-            ReverseIterVector operator-(difference_type n) const {
-                return (ReverseIterVector(_ptr + n));
+            ReverseIterator operator-(difference_type n) const {
+                return (ReverseIterator(_ptr + n));
             }
 
-            ReverseIterVector & operator+=(difference_type n) {
+            ReverseIterator & operator+=(difference_type n) {
                 _ptr -= n;
                 return (*this);
             }
 
-            ReverseIterVector & operator-=(difference_type n) {
+            ReverseIterator & operator-=(difference_type n) {
                 _ptr += n;
                 return (*this);
             }
@@ -102,27 +102,27 @@ namespace ft {
                 return (_ptr[- n - 1]);
             }
 
-            bool operator==(ReverseIterVector const & rhs) const {
+            bool operator==(ReverseIterator const & rhs) const {
                 return (_ptr == rhs._ptr);
             }
 
-            bool operator!=(ReverseIterVector const & rhs) const {
+            bool operator!=(ReverseIterator const & rhs) const {
                 return (!(_ptr == rhs._ptr));
             }
 
-            bool operator<(ReverseIterVector const & rhs) const {
+            bool operator<(ReverseIterator const & rhs) const {
                 return (_ptr < rhs._ptr);
             }
 
-            bool operator<=(ReverseIterVector const & rhs) const {
+            bool operator<=(ReverseIterator const & rhs) const {
                 return (_ptr <= rhs._ptr);
             }
 
-            bool operator>(ReverseIterVector const & rhs) const {
+            bool operator>(ReverseIterator const & rhs) const {
                 return (_ptr > rhs._ptr);
             }
 
-            bool operator>=(ReverseIterVector const & rhs) const {
+            bool operator>=(ReverseIterator const & rhs) const {
                 return (_ptr >= rhs._ptr);
             }
 
