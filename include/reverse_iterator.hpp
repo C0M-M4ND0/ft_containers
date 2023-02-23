@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:04:34 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/08 11:39:46 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:53:18 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <cstddef>
 #include "iterator_traits.hpp"
 
-    //reverse_iterator
+//reverse_iterator
 namespace ft {
     
     template <class __Iter__>
@@ -51,11 +51,13 @@ namespace ft {
             }
 
             reference operator*() const {
-                return (*_ptr);
+                __Iter__ tmp = _ptr;
+                return (*--tmp);
             }
 
             pointer operator->() const {
-                return (_ptr);
+                __Iter__ tmp = _ptr;
+                return (&(*--tmp));
             }
 
             ReverseIterator & operator++() {

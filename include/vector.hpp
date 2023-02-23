@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:54:52 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/10 12:49:04 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:25:41 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 #include <exception>
 #include <iostream>
 #include <memory>
-#include <vector>
 
 #include "iterator.hpp"
 #include "reverse_iterator.hpp"
-#include "type_traits.hpp"
 #include "utility.hpp"
 namespace ft {
     template <class T, class Alloc = std::allocator<T> >
@@ -86,6 +84,7 @@ namespace ft {
             {
                 size_type n = x.size();
                 if (n > 0) {
+                    __vdeallocate__();
                     __vallocate__(n);
                     __construct_at_end__(n, x.__begin, x.__end);
                 }
@@ -112,19 +111,19 @@ namespace ft {
         }
 
         reverse_iterator rbegin() {
-            return (__make_reverse_iterator__(__end - 1));
+            return (__make_reverse_iterator__(__end));
         }
 
         const_reverse_iterator rbegin() const {
-            return (__make_reverse_iterator__(__end - 1));
+            return (__make_reverse_iterator__(__end));
         }
 
         reverse_iterator rend() {
-            return (__make_reverse_iterator__(__begin - 1));
+            return (__make_reverse_iterator__(__begin));
         }
 
         const_reverse_iterator rend() const {
-            return (__make_reverse_iterator__(__begin - 1));
+            return (__make_reverse_iterator__(__begin));
         }
         // end iterators
 
@@ -161,12 +160,6 @@ namespace ft {
         void reserve(size_type n) {
             if (n > capacity()) {
                 __realloc__(n);
-            }
-        }
-
-        void shrink_to_fit() {
-            if (size() < capacity()) {
-                resize(size());
             }
         }
         // end capacity
@@ -221,9 +214,14 @@ namespace ft {
         // modifiers
         template <class InputIterator>
         void assign (InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last) {
-            clear();
-            for (; first != last; ++first)
-                push_back(*first);      
+            InputIterator it = first;
+            size_type n = 0;
+            while (it != last) {
+                ++it;
+                ++n;
+            }
+            resize(n);
+            __construct_at_end__(n, first, last);
         }
 
         void assign (size_type n, const value_type& val){
@@ -270,6 +268,7 @@ namespace ft {
                     __begin[__i] = __begin[__i - 1];
                 this->alloc.construct(__begin + __distance, val);
                 ++__end;
+                __pos =  __begin + __distance;
             }
             return (__make_iterator__(__pos));
         }
@@ -304,36 +303,33 @@ namespace ft {
 
         template <class InputIterator>
         void insert (iterator position, InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last){
-            size_type __n = std::distance(first, last);
-            if (__n == 0)
-                return ;
-            pointer __pos = __begin + (position - begin());
-            if (__end + __n <= __end_cap) {
-                if (__pos == __end) {
-                    while (first != last) {
-                        alloc.construct(__end, *first);
-                        ++first;
+                vector  __tmp(first, last);
+                size_type __n = __tmp.size();
+                if (__n == 0)
+                    return ;
+                pointer __pos = __begin + (position - begin());
+                if (__end + __n <= __end_cap) {
+                    if (__pos == __end) {
+                        __construct_at_end__(__n, __tmp.begin(), __tmp.end());
+                    }
+                    else {
+                        for (pointer __i = __end + __n - 1; __i >= __pos + __n; --__i)
+                            *__i = *(__i - __n);
+                        for (pointer __i = __pos; __i < __pos + __n; ++__i)
+                           alloc.construct(__i, *__tmp.begin());
+                        __end += __n;
                     }
                 }
                 else {
-                    for (pointer __i = __end + __n - 1; __i >= __pos + __n; --__i)
-                        *__i = *(__i - __n);
-                    for (pointer __i = __pos; __i < __pos + __n; ++__i, ++first)
-                        *__i = *first;
-                    __end += __n;
+                    size_type __position = __pos - __begin;
+                    size_type __new_size = size() + __n;
+                    __realloc__(__new_size);
+                    __construct_at_end__(__n, 0);
+                    for (size_type __i = __new_size - 1; __i >= __position + __n; --__i)
+                        __begin[__i] = __begin[__i - __n];
+                    for (size_type __i = __position; __i < __position + __n; __i++)
+                        alloc.construct(__begin + __i, *__tmp.begin());
                 }
-            }
-            else {
-                size_type __position = __pos - __begin;
-                size_type __new_size = size() + __n;
-                __realloc__(__new_size);
-                __end += __n;
-                for (size_type __i = __new_size - 1; __i >= __position + __n; --__i) 
-                    __begin[__i] = __begin[__i - __n];
-                for (size_type __i = __position; __i < __position + __n; ++__i, ++first)
-                    alloc.construct(__begin + __i, *first);
-            }
-            
         }
 
         iterator erase(iterator position) {

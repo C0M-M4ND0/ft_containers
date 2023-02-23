@@ -6,12 +6,12 @@
 #    By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 13:50:20 by oabdelha          #+#    #+#              #
-#    Updated: 2023/02/10 11:04:54 by oabdelha         ###   ########.fr        #
+#    Updated: 2023/02/23 22:29:54 by oabdelha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -g #-fsanitize=address -fsanitize=undefined #-std=c++98 -Wall -Werror -Wextra
+CXXFLAGS = -g  -std=c++98 -Wall -Werror -Wextra #-fsanitize=address  -fsanitize=undefined
 
 OBJECT_PATH = ./object_files/
 FOBJ_SRC = object_files
@@ -19,7 +19,7 @@ SRC = main.cpp
 
 NAME = main
 
-INCLUDE = $(addprefix include/, vector.hpp iterator.hpp reverse_iterator.hpp type_traits.hpp iterator_traits.hpp map.hpp red-black_tree.hpp red-black_tree_iterator.hpp)
+INCLUDE = $(addprefix include/, vector.hpp iterator.hpp reverse_iterator.hpp iterator_traits.hpp map.hpp red-black_tree.hpp red-black_tree_iterator.hpp set.hpp utility.hpp)
 OBJECTS = $(addprefix $(OBJECT_PATH), $(SRC:.cpp=.o))
 
 all: $(NAME)

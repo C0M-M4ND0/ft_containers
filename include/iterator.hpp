@@ -26,17 +26,18 @@ namespace ft {
                                 typename iterator_traits<__Iter__>::reference>
     {
         public:
-            typedef typename ft::iterator_traits<__Iter__>::difference_type     difference_type;
-            typedef typename ft::iterator_traits<__Iter__>::value_type          value_type;
-            typedef typename ft::iterator_traits<__Iter__>::pointer             pointer;
-            typedef typename ft::iterator_traits<__Iter__>::reference           reference;
-            typedef typename ft::iterator_traits<__Iter__>::iterator_category   iterator_category;
+            typedef __Iter__                                                         iterator_type;
+            typedef typename ft::iterator_traits<iterator_type>::difference_type     difference_type;
+            typedef typename ft::iterator_traits<iterator_type>::value_type          value_type;
+            typedef typename ft::iterator_traits<iterator_type>::pointer             pointer;
+            typedef typename ft::iterator_traits<iterator_type>::reference           reference;
+            typedef typename ft::iterator_traits<iterator_type>::iterator_category   iterator_category;
 
             IterVector() : _ptr(NULL) {
                 
             }
 
-            explicit IterVector(__Iter__ ptr) : _ptr(ptr) {
+            explicit IterVector(iterator_type ptr) : _ptr(ptr) {
                 
             }
             
@@ -145,7 +146,7 @@ namespace ft {
             }
 
         private:
-            __Iter__ _ptr;
+            iterator_type _ptr;
     };
 
 }

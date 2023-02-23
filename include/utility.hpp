@@ -6,16 +6,12 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:15:26 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/26 16:35:00 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:23:51 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __UTILITY_HPP__
 #define __UTILITY_HPP__
-
-#include "iterator.hpp"
-#include "type_traits.hpp"
-
 
 namespace ft{
     //lexicographical_compare
@@ -91,12 +87,12 @@ inline bool operator!= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 
 template <class T1, class T2>
 inline bool operator> (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
-    return (lhs.first>rhs.first || (!(rhs.first<lhs.first) && lhs.second>rhs.second));
+   return (rhs < lhs);
 }
 
 template <class T1, class T2>
 inline bool operator< (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
-    return (rhs>lhs);
+    return ((lhs.first < rhs.first) || (!(rhs.first < lhs.first) && lhs.second < rhs.second));
 }
 
 template <class T1, class T2>
@@ -116,6 +112,111 @@ inline pair<T1,T2> make_pair (T1 x, T2 y) {
 // End of non-member functions
 // End of pair
 
+//type_traits
 
+typedef std::integral_constant<bool, true> true_type;
+typedef std::integral_constant<bool, false> false_type;
+
+ template <bool Cond, class T = void>
+    struct enable_if {
+        
+    };
+
+    template <class T>
+    struct enable_if<true, T>
+    {
+        typedef T type;
+    };
+
+    
+    // is_integral
+    template <class T>
+    struct is_integral: false_type
+    {
+        
+    };
+    
+    template <>
+    struct is_integral<bool>: true_type
+    {
+        
+    };
+
+    template <>
+    struct is_integral<char>: true_type
+    {
+        
+    };
+
+    template <>
+    struct is_integral<unsigned char>: true_type
+    {
+        
+    };
+
+    template<>
+    struct is_integral<signed char>: true_type
+    {
+          
+    };
+
+    template <>
+    struct is_integral<int>: true_type
+    {
+        
+    };
+
+    template <>
+    struct is_integral<unsigned int>: true_type
+    {
+        
+    };
+
+    template <>
+    struct is_integral<short>: true_type
+    {
+        
+    };
+    
+    template <>
+    struct is_integral<unsigned short>: true_type
+    {
+        
+    };
+    
+    template <>
+    struct is_integral<long>: true_type
+    {
+        
+    };
+
+    template <>
+    struct is_integral<long long>: true_type
+    {
+          
+    };
+
+    template<>
+    struct is_integral<wchar_t>: true_type
+    {
+          
+    };
+
+    template<>
+    struct is_integral<unsigned long>: true_type
+    {
+          
+    };
+    
+    template<>
+    struct is_integral<unsigned long long>: true_type
+    {
+          
+    };
+    template <>
+    struct is_integral<char16_t>: true_type
+    {
+        
+    };
 }
 #endif // __UTILITY_HPP__
