@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:54:52 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/23 22:25:41 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:40:27 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ namespace ft {
         }
 
         template <class InputIterator>
-        vector(InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last,
+        vector(typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type  first, InputIterator last,
             const allocator_type &alloc = allocator_type())
             : alloc(alloc)
             , __begin(NULL)
@@ -316,7 +316,7 @@ namespace ft {
                         for (pointer __i = __end + __n - 1; __i >= __pos + __n; --__i)
                             *__i = *(__i - __n);
                         for (pointer __i = __pos; __i < __pos + __n; ++__i)
-                           alloc.construct(__i, *__tmp.begin());
+                           alloc.construct(__i, *(__tmp.begin() + (__i - __pos)));
                         __end += __n;
                     }
                 }
@@ -328,7 +328,7 @@ namespace ft {
                     for (size_type __i = __new_size - 1; __i >= __position + __n; --__i)
                         __begin[__i] = __begin[__i - __n];
                     for (size_type __i = __position; __i < __position + __n; __i++)
-                        alloc.construct(__begin + __i, *__tmp.begin());
+                        alloc.construct(__begin + __i, *(__tmp.begin() + (__i - __position)));
                 }
         }
 
@@ -491,7 +491,6 @@ namespace ft {
             pointer __new_begin = alloc.allocate(__cap);
             pointer __new_end = __new_begin;
             __new_end = std::uninitialized_copy(__begin, __end, __new_begin);
-            __destruct_at_end__(__begin);
             alloc.deallocate(__begin, capacity());
             __begin = __new_begin;
             __end = __new_end;
@@ -530,7 +529,7 @@ namespace ft {
 
     template <class T, class Alloc>
     bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-        return (lhs.size() <= rhs.size());
+        return !(rhs < lhs);
     }
     
     template <class T, class Alloc>

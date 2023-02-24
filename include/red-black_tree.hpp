@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:07:11 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/23 12:53:34 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:30:43 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ namespace ft{
         NodePtr                                                                     end_node;
     // private functions
     private:
-        allocator_type                                                              alloc;
         value_compare                                                               compare;
+        allocator_type                                                              alloc;
         typedef typename allocator_type::template rebind<Node<value_type> >::other  node_allocator;
         node_allocator                                                              node_alloc;
         
@@ -547,12 +547,11 @@ namespace ft{
                 begin_node = node;
                 return (node);
             }
-            while (position != end() && compare(val, *position))
-                ++position;
-            if (position == end())
+            NodePtr tmp = position.get_node();
+            if (compare(val, tmp->data))
+                add_node(tmp, node);
+            else 
                 add_node(left_child(end_node), node);
-            else
-                add_node(position.get_node(), node);    
             if (compare(node->data, begin_node->data))
                 begin_node = node;
             if (parent(node)->color == RED)

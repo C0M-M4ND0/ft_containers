@@ -6,13 +6,13 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:15:26 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/23 22:23:51 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:14:04 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __UTILITY_HPP__
 #define __UTILITY_HPP__
-
+#include <type_traits>
 namespace ft{
     //lexicographical_compare
     //Compares the elements in the range [first1,last1) with those in the range [first2,last2) and returns true if the first range is lexicographically less than the second.
@@ -114,8 +114,6 @@ inline pair<T1,T2> make_pair (T1 x, T2 y) {
 
 //type_traits
 
-typedef std::integral_constant<bool, true> true_type;
-typedef std::integral_constant<bool, false> false_type;
 
  template <bool Cond, class T = void>
     struct enable_if {
@@ -130,6 +128,8 @@ typedef std::integral_constant<bool, false> false_type;
 
     
     // is_integral
+    typedef std::integral_constant<bool, true> true_type;
+    typedef std::integral_constant<bool, false> false_type;
     template <class T>
     struct is_integral: false_type
     {
