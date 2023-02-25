@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 19:54:22 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/24 22:27:46 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:37:58 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <ctime>
 #include "ft_containers.hpp"
 #include "std_containers.hpp"
-
+#include <sys/time.h>
 //constructors
 void vector_constructor() {
     std::cout << "vector constructors test start" << std::endl;
@@ -24,17 +24,17 @@ void vector_constructor() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
-    
-    start = clock();
+    struct timeval start, end;
+ 
+    gettimeofday(&start, NULL);
     std_vector = std_vector_constructors_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
-    
-    start = clock();
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
+
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_constructors_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector constructors test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -47,34 +47,34 @@ void vector_constructor() {
     std::cout << "vector constructors test end" << std::endl << std::endl;
 }
 
-//assiment operator
-void vector_assiment_operator() {
-    std::cout << "vector assiment operator test start" << std::endl;
+//assignment operator
+void vector_assignment_operator() {
+    std::cout << "vector assignment operator test start" << std::endl;
     std::vector<int> std_vector;
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
-    
-    start = clock();
-    std_vector = std_vector_assiment_operator_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
-    
-    start = clock();
-    ft_vector = ft_vector_assiment_operator_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    struct timeval start, end;
+ 
+    gettimeofday(&start, NULL);
+    std_vector = std_vector_assignment_operator_test();
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
+
+    gettimeofday(&start, NULL);
+    ft_vector = ft_vector_assignment_operator_test();
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
-        std::cout << "\033[1;32mvector assiment operator test passed\033[0m" << std::endl;
+        std::cout << "\033[1;32mvector assignment operator test passed\033[0m" << std::endl;
         if (std_time > ft_time)
             std::cout << std::fixed << "\033[1;32mft_vector time: " << ft_time << "\033[0m" << std::endl << "\033[1;31mstd_vector time: " << std_time << "\033[0m" << std::endl;
         else
             std::cout << std::fixed << "\033[1;31mft_vector time: " << ft_time << "\033[0m" << std::endl << "\033[1;32mstd_vector time: " << std_time << "\033[0m" << std::endl;
     }
     else
-        std::cout << "\033[1;31mvector assiment operator test failed\033[0m" << std::endl;
-    std::cout << "vector assiment operator test end" << std::endl << std::endl;
+        std::cout << "\033[1;31mvector assignment operator test failed\033[0m" << std::endl;
+    std::cout << "vector assignment operator test end" << std::endl << std::endl;
 }
 
 //size
@@ -84,17 +84,17 @@ void vector_size() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_size_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_size_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector size test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -114,17 +114,17 @@ void vector_resize() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_resize_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_resize_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector resize test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -144,17 +144,17 @@ void vector_capacity() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_capacity_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_capacity_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector capacity test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -173,17 +173,17 @@ void vector_reserve() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_reserve_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_reserve_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector reserve test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -202,17 +202,17 @@ void vector_assign() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_assign_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_assign_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector assign test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -231,17 +231,17 @@ void vector_insert() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_insert_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_insert_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector insert test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -260,17 +260,17 @@ void vector_erase() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_erase_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_erase_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector erase test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -289,17 +289,17 @@ void vector_swap() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_swap_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_swap_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector swap test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -318,17 +318,17 @@ void vector_clear() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_clear_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_clear_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector clear test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -347,17 +347,17 @@ void vector_relational_operators() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_vector_relational_operators_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_vector_relational_operators_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mvector relational operators test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -375,7 +375,7 @@ void vector_tests(int time) {
     vector_constructor();
     std::cout << "\x1B[2J\x1B[H";
     sleep (time);
-    vector_assiment_operator();
+    vector_assignment_operator();
     std::cout << "\x1B[2J\x1B[H";
     sleep (time);
     vector_size();

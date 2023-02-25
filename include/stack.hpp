@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:54:34 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/26 16:41:21 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:48:20 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ namespace ft {
             container_type c;
         public:
             explicit stack (const container_type& ctnr = container_type()) : c(ctnr) {
-                
+
             }
             
             bool empty() const {

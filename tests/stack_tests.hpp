@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:19:18 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/24 22:38:46 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:42:18 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <ctime>
 #include "ft_containers.hpp"
 #include "std_containers.hpp"
+#include <sys/time.h>
 
 //constructor
 void   stack_constructor_test() {
@@ -24,17 +25,17 @@ void   stack_constructor_test() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_stack_constructor_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_stack_constructor_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mstack constructor test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -53,17 +54,17 @@ void   stack_size_test() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_stack_size_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_stack_size_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mstack size test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -82,17 +83,17 @@ void   stack_empty_test() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_stack_empty_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_stack_empty_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mstack empty test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -111,17 +112,17 @@ void   stack_swap_test() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_stack_swap_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_stack_swap_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mstack swap test passed\033[0m" << std::endl;
         if (std_time > ft_time)
@@ -140,17 +141,17 @@ void   stack_relational_operators_test() {
     std::vector<int> ft_vector;
     
     double std_time, ft_time;
-    clock_t start, end;
+    struct timeval start, end;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     std_vector = std_stack_relational_operators_test();
-    end = clock();
-    std_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    std_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     
-    start = clock();
+    gettimeofday(&start, NULL);
     ft_vector = ft_stack_relational_operators_test();
-    end = clock();
-    ft_time = (double)(end - start) / (double)CLOCKS_PER_SEC;
+    gettimeofday(&end, NULL);
+    ft_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
     if (std_vector == ft_vector){
         std::cout << "\033[1;32mstack relational operators test passed\033[0m" << std::endl;
         if (std_time > ft_time)

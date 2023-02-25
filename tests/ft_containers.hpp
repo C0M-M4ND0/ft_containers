@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:25 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/24 23:00:49 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:35:14 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ std::vector<int> ft_vector_constructors_test() {
     return res;
 }
 
-//assiment operator
-std::vector<int> ft_vector_assiment_operator_test() {
+//assignment operator
+std::vector<int> ft_vector_assignment_operator_test() {
     std::vector<int> res;
     ft::vector<int> foo (3,0);
     ft::vector<int> bar (5,0);
