@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:07:11 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/24 21:30:43 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 14:06:44 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,28 +247,28 @@ namespace ft{
         while (node != left_child(end_node) && node->color == BLACK) {
             if (is_left_child(node)) {
                 tmp = sibling(node);
+                //if sibling is red : swap colors and rotate left 
                 if (tmp->color == RED) {
-                    // std::cout << "case 1" << std::endl;
                     tmp->color = BLACK;
                     parent(node)->color = RED;
                     left_rotate(parent(node));
                     tmp = sibling(node);
                 }
+                // if sibling is black and both children are black : recolor 
                 if ((left_child(tmp) == NULL || left_child(tmp)->color == BLACK) && (right_child(tmp) == NULL || right_child(tmp)->color == BLACK)) {
-                    // std::cout << "case 2" << std::endl;
                     tmp->color = RED;
                     node = parent(node);
                 }
                 else 
                 {
+                    // if sibling is black and left child is red and right child is black : swap colors and rotate right
                     if (right_child(tmp) == NULL || right_child(tmp)->color == BLACK) {
-                        // std::cout << "case 3" << std::endl;
                         left_child(tmp)->color = BLACK;
                         tmp->color = RED;
                         right_rotate(tmp);
                         tmp = sibling(node);
                     }
-                    // std::cout << "case 4" << std::endl;
+                    // sibling is black and right child is red : swap colors and rotate left
                     tmp->color = parent(node)->color;
                     parent(node)->color = BLACK;
                     right_child(tmp)->color = BLACK;
@@ -593,91 +593,8 @@ namespace ft{
         value_compare value_comp() const {
             return (compare);
         }
-        //temporary function
-        void padding(char c, int n) const
-        {
-            for (int i = 0; i < n; i++)
-                std::cout << c;
-        }
-        
-        void print_tree(NodePtr _root, int lvl = 0) const 
-        {
-            if (_root == NULL)
-            {
-                padding('\t', lvl);
-                // std::cout << "~";
-            }
-            else
-            {
-                print_tree(_root->left, lvl + 1);
-                padding('\t', lvl*2);
-                if (_root->color == RED)
-                    std::cout << "r";
-                std::cout << _root->data.first /*<< ":" << _root->_value.second*/;
-                // if (_root->_parent)
-                //     std::cout << _root->_parent->_value.first;
-                // else
-                //     std::cout << "NULL";
-                std::cout << std::endl;
-                print_tree(_root->right, lvl + 1);
-            }
-            std::cout << std::endl;
-        }
-        void find_node_next(NodePtr root, int lvl, NodePtr *arr, size_t &indx)
-        {
-            if (!root)
-            {
-                lvl = pow(2, lvl);
-                while (lvl-- > 0)
-                    arr[indx++] = NULL;
-                return ;
-            }
-            if (lvl == 1)
-            {
-                arr[indx++] = root->left;
-                arr[indx++] = root->right;
-                return;
-            }
-            find_node_next(root->left, lvl-1, arr, indx);
-            find_node_next(root->right, lvl-1, arr, indx);
-        }
-         void print_tree_2(NodePtr _root)
-        {
-            NodePtr arr[1000000];
-            size_t index = 1;
-            size_t height = 2 * log2(size());
-            
-            arr[0] = _root;
-            for (size_t j = 0 ; j < height; j++)
-                    find_node_next(_root, j + 1, arr, index);
-            size_t lvl = 1;
-            int pad = height * 16;
-            while (arr[--index] == NULL);
-            for (size_t i = 0; i <= index; i++)
-            {
-                if (i + 1 == lvl)
-                {                
-                    std::cout << "\n\n\n";
-                    lvl *= 2;
-                    pad /= 2;
-                }
-                padding(' ', pad);
-                if (arr[i])
-                {
-                    if (arr[i]->color == RED)
-                        std::cout << "\e[0;31m";
-                    std::cout << '(' << arr[i]->data.first << ')' << "\e[0m";
-                }
-                else
-                    std::cout << "  ";
-                padding(' ', pad);
-            }
-            std::cout << "\n\n\n";
-            (void)_root;
-            (void)arr;
-        }
+        // end observers
     };
 }
 
-// compare returns true if the first argument is less than the second
 #endif // __RED_BLACK_TREE_H__

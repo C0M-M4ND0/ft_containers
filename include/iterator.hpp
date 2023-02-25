@@ -19,11 +19,7 @@
 namespace ft {
 
    template <class __Iter__>
-    class IterVector : iterator<typename iterator_traits<__Iter__>::iterator_category, 
-                                typename iterator_traits<__Iter__>::value_type,
-                                typename iterator_traits<__Iter__>::difference_type,
-                                typename iterator_traits<__Iter__>::pointer,
-                                typename iterator_traits<__Iter__>::reference>
+    class IterVector
     {
         public:
             typedef __Iter__                                                         iterator_type;

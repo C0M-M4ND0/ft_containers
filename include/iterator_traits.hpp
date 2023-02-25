@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 18:16:15 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/01/28 12:37:58 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:46:33 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #define __ITERATOR_TRAITS_H__
 
 namespace ft {
-
-    template <class Category, class T, class Distance = ptrdiff_t,
-          class Pointer = T*, class Reference = T&>
-    struct iterator {
-    typedef T         value_type;
-    typedef Distance  difference_type;
-    typedef Pointer   pointer;
-    typedef Reference reference;
-    typedef Category  iterator_category;
-    };
-
    template<class Iterator>
     class iterator_traits
     {

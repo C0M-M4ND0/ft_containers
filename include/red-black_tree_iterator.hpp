@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:32:06 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/24 12:33:15 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:33:46 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include <__tree>
 #include "red-black_tree.hpp"
 #include <iostream>
-namespace ft{
+namespace ft{ 
+    
     template <class __T, class __NodePtr>
     class red_black_tree_const_iterator;
-    
     template <class __T, class __NodePtr>
     class red_black_tree_iterator {
         friend class red_black_tree_const_iterator<__T, __NodePtr>;
@@ -101,7 +101,6 @@ namespace ft{
     // const iterator
     template <class __T, class __NodePtr>
     class red_black_tree_const_iterator {
-        friend class red_black_tree_iterator<__T, __NodePtr>;
         public:
             typedef __T                             value_type;
             typedef __NodePtr                       iterator_type;
@@ -117,7 +116,7 @@ namespace ft{
             explicit red_black_tree_const_iterator(__NodePtr ptr) : _ptr(ptr) {
                 
             }
-            
+
             template <class _T ,class _NodePtr>
             red_black_tree_const_iterator(red_black_tree_iterator<_T, _NodePtr> const & rhs): _ptr(rhs._ptr) {
 
@@ -170,6 +169,10 @@ namespace ft{
                 return (_ptr != rhs._ptr);
             }
 
+            iterator_type &get_node() const{
+                return (_ptr);
+            }
+            
         private:
             iterator_type _ptr;
     };
