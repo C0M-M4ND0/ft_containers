@@ -32,7 +32,7 @@ Bonus : 25/25
   The implementation has been tested using the ft_containers-unit-test, which can be found at https://github.com/divinepet/ft_containers-unit-test. 
   The tests cover a wide range of scenarios and edge cases, and are designed to ensure that the containers behave correctly and efficiently.
   
-  In addition to the unit tests, I have included some additional tests in the test directory. These tests cover some additional scenarios and edge cases, and can be run using make and the appropriate command line arguments. The available tests are:<br>
+  In addition to the unit tests, I have included some additional tests in the ``tests`` directory. These tests cover some additional scenarios and edge cases, and can be run using make and the appropriate command line arguments. The available tests are:<br>
    main -v: Runs tests for the vector container.<br>
    main -st: Runs tests for the stack container.<br>
    main -s: Runs tests for the set container.<br>
