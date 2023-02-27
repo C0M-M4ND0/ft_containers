@@ -6,7 +6,7 @@
 /*   By: oabdelha <oabdelha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 22:37:04 by oabdelha          #+#    #+#             */
-/*   Updated: 2023/02/25 11:36:20 by oabdelha         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:19:47 by oabdelha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int main (int argc, char **argv) {
         else if (!strcmp(argv[1], "-st"))
             stack_tests(time);
         else
-            std::cout << "Usage: ./ft_containers -m/-v [-fast]" << std::endl;
+            std::cout << "Usage: ./ft_containers -m/-v/-s/-st [-fast]" << std::endl;
     }
     else
-        std::cout << "Usage: ./ft_containers -m/-v [-fast]" << std::endl;
+        std::cout << "Usage: ./ft_containers -m/-v/-s/-st [-fast]" << std::endl;
     return (1);
 }
